@@ -3,6 +3,7 @@ package com.example.ulyaf.cheshirbot;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import java.io.Console;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+                String answer = getAnswer(phrase);
 
 
 
 
 
 
-
-                addPhrase(color2, color3, phrase, false);
+                addPhrase(color2, color3, answer, false);
 
             }
         });
@@ -74,5 +80,50 @@ public class MainActivity extends AppCompatActivity {
         b.setTextSize(22);
         b.setTextAlignment(who ? View.TEXT_ALIGNMENT_TEXT_END : View.TEXT_ALIGNMENT_TEXT_START);
         countID++;
+    }
+
+    private String getAnswer(String phrase) {
+        String answer = "";
+        try {
+
+            XmlPullParser parser = getResources().getXml(R.xml.phrases);
+            boolean human = false;
+            boolean a = false;
+            boolean bot = false;
+            while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
+                switch (parser.getEventType()) {
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    case XmlPullParser.START_TAG:
+                        String name = parser.getName();
+                        human = name.equals("human_phrase");
+                        bot = a && name.equals("bot_answer");
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        String text = parser.getText();
+                        if ((text.equals(phrase)) && (human)) {
+                            a = true;
+                        }
+                        if (bot) {
+                            answer = text;
+                            a = false;
+                            bot = false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                parser.next();
+            }
+
+
+        } catch (Throwable t) {
+            Toast.makeText(this,
+                    "Ошибка при загрузке XML-документа: " + t.toString(),
+                    Toast.LENGTH_LONG).show();
+        }
+        return answer;
     }
 }

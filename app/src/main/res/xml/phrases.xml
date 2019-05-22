@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <phrase>
+        <human_phrase>Привет</human_phrase>
+        <human_phrase>привет</human_phrase>
+        <human_phrase>Здравствуй</human_phrase>
+        <bot_answer> Привет </bot_answer>
+    </phrase>
+    <phrase>
+        <human_phrase>Как тебя зовут?</human_phrase>
+        <human_phrase>У тебя есть имя?</human_phrase>
+        <bot_answer> Меня зовут Чешир </bot_answer>
+    </phrase>
+    <phrase>
+        <human_phrase>Ты кто?</human_phrase>
+        <human_phrase>Кто ты такой?</human_phrase>
+        <bot_answer> Я прототип бота </bot_answer>
+    </phrase>
+    <phrase>
+        <human_phrase>Расскажи анекдот</human_phrase>
+        <human_phrase>Пошути</human_phrase>
+        <bot_answer> Моя жена спросила меня, почему я так тихо разговариваю в доме. Я сказал, что боюсь, что Марк Цукерберг слушает. В ответ она засмеялась. И я тоже засмеялся. И Алекса засмеялась. И Сири засмеялась. </bot_answer>
+    </phrase>
+</root>
