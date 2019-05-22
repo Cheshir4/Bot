@@ -3,6 +3,7 @@ package com.example.ulyaf.cheshirbot;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,38 +31,48 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String color1 = "#FF033E";
-                TextView b = new TextView(getApplicationContext());
-                b.setBackgroundColor(Color.parseColor(color1));
+                String color2 = "#FFFFFF";
+                String color3 = "#000000";
+
                 EditText editText = (EditText)findViewById(R.id.editText1);
                 String phrase = editText.getText().toString();
                 editText.setText("");
-                b.setText(phrase);
-                b.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT)
-                );
-                b.setId(USERID + countID);
-                linearLayout.addView(b);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) b.getLayoutParams();
-                params.bottomMargin += 10;
-                params.leftMargin += 10;
-                params.rightMargin += 10;
-                countID++;
+                addPhrase(color1, color2, phrase, true);
+
+
+
+
+
+
+
+
+
+
+
+                addPhrase(color2, color3, phrase, false);
+
             }
         });
     }
-/*
-    public void onButtonClick(View view) {
-        //Почему final
-        EditText editText = (EditText)findViewById(R.id.editText1);
-        TextView textView = (TextView)findViewById(R.id.textView1);
 
-        String phrase = editText.getText().toString();
-        textView.setText(phrase);
+    private void addPhrase(String colorBack, String colorText, String phrase, boolean who) { // who - true: человек, false: бот
+        TextView b = new TextView(getApplicationContext());
+        b.setBackgroundColor(Color.parseColor(colorBack));
+        b.setText(phrase);
+        b.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT)
+        );
+        b.setId(USERID + countID);
+        linearLayout.addView(b);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) b.getLayoutParams();
+        params.bottomMargin += 10;
+        params.leftMargin += 10;
+        params.rightMargin += 10;
+        b.setTextColor(Color.parseColor(colorText));
+        b.setTextSize(22);
+        b.setTextAlignment(who ? View.TEXT_ALIGNMENT_TEXT_END : View.TEXT_ALIGNMENT_TEXT_START);
+        countID++;
     }
-
-
-
-    }*/
 }
